@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1264c6">
+  <meta name="description" content="Calculate a monthly savings target for your child's future education and request personal guidance.">
+
+  <title>School Fees Future Planner</title>
+
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <header>
+    <div class="wrap header-inner">
+      <a href="#home" class="brand" aria-label="Home">
+        <img src="assets/brand-image.svg" alt="ICEA LION Group">
+      </a>
+
+      <div class="site-name">
+        School Fees<br>
+        <strong>Future Planner</strong>
+      </div>
+
+      <a href="#planner" class="button outline header-button">
+        Start planning ↗
+      </a>
+    </div>
+  </header>
+
+  <nav aria-label="Main navigation">
+    <div class="wrap nav-inner">
+      <a href="#planner">Plan school fees</a>
+      <a href="#how">How it works</a>
+      <a href="#questions">Your questions</a>
+      <span>A free tool for parents</span>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="wrap hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow">BIG DREAMS. A CLEARER PLAN.</p>
+
+          <h1>
+            Your child has a dream.<br>
+            Let’s plan for it.
+          </h1>
+
+          <p class="hero-description">
+            Turn tomorrow’s school fees into a monthly savings
+            target today. Start with your goal. Take the next
+            step with confidence.
+          </p>
+
+          <a href="#planner" class="button white-button">
+            Calculate my savings target →
+          </a>
+
+          <p class="hero-note">
+            Free to use · No sign-up to see your result
+          </p>
+        </div>
+
+        <img
+          class="hero-photo"
+          src="assets/parents.svg"
+          alt="A couple planning together using a laptop"
+        >
+      </div>
+    </section>
+
+    <section class="wrap steps" id="how">
+      <article>
+        <span class="step-number">01</span>
+        <div>
+          <h2>Tell us your goal</h2>
+          <p>Your target, timeline and savings so far.</p>
+        </div>
+      </article>
+
+      <article>
+        <span class="step-number">02</span>
+        <div>
+          <h2>See your monthly target</h2>
+          <p>A clear starting point for your plan.</p>
+        </div>
+      </article>
+
+      <article>
+        <span class="step-number">03</span>
+        <div>
+          <h2>Get personal guidance</h2>
+          <p>Share your plan with Moses on WhatsApp.</p>
+        </div>
+      </article>
+    </section>
+
+    <section class="planner-section" id="planner">
+      <div class="wrap">
+        <div class="section-heading">
+          <p class="eyebrow blue">
+            PLAN TODAY. OPEN DOORS TOMORROW.
+          </p>
+          <h2>Make their next chapter possible.</h2>
+          <p>
+            Start with a savings target you can adjust
+            as your plans develop.
+          </p>
+        </div>
+
+        <div class="planner-grid">
+          <form id="plannerForm" class="card" novalidate>
+            <div class="card-heading">
+              <span class="pill">STEP 1 OF 2</span>
+              <span>About your goal</span>
+            </div>
+
+            <label for="goalType">
+              What are you planning for?
+            </label>
+
+            <select id="goalType">
+              <option>Secondary school</option>
+              <option>University or college</option>
+              <option>Primary school</option>
+              <option>Other education goal</option>
+            </select>
+
+            <div class="field-grid">
+              <div>
+                <label for="target">
+                  Future education target (KES)
+                </label>
+
+                <input
+                  id="target"
+                  type="number"
+                  value="600000"
+                  min="1"
+                  max="1000000000"
+                  step="any"
+                  required
+                >
+
+                <small>
+                  The total amount you want ready
+                  by your goal date.
+                </small>
+              </div>
+
+              <div>
+                <label for="years">
+                  Years until you need the money
+                </label>
+
+                <input
+                  id="years"
+                  type="number"
+                  value="10"
+                  min="0.0833333333"
+                  max="40"
+                  step="any"
+                  required
+                >
+
+                <small>
+                  For six months, enter 0.5.
+                </small>
+              </div>
+            </div>
+
+            <label for="saved">
+              Savings already set aside (KES)
+            </label>
+
+            <input
+              id="saved"
+              type="number"
+              value="60000"
+              min="0"
+              max="1000000000"
+              step="any"
+              required
+            >
+
+            <p class="helper">
+              This planner assumes no investment growth.
+              Enter a future target that reflects your own
+              expectations for school fees.
+            </p>
+
+            <p id="calcError" class="error" role="alert"></p>
+
+            <button class="button primary" type="submit">
+              Show my monthly target →
+            </button>
+          </form>
+
+          <aside class="card result-card">
+            <div class="card-heading">
+              <span class="pill">YOUR STARTING POINT</span>
+            </div>
+
+            <h3>
+              A small step today.<br>
+              A brighter future ahead.
+            </h3>
+
+            <p id="resultIntro">
+              Example: KES 600,000 over 10 years,
+              with KES 60,000 already saved.
+            </p>
+
+            <div class="amount">
+              <span>Monthly savings target</span>
+              <strong id="monthly">KES 4,500</strong>
+              <span id="timeline">for 120 months</span>
+            </div>
+
+            <dl class="result-details">
+              <div>
+                <dt>Education target</dt>
+                <dd id="targetOut">KES 600,000</dd>
+              </div>
+
+              <div>
+                <dt>Already saved</dt>
+                <dd id="savedOut">KES 60,000</dd>
+              </div>
+
+              <div>
+                <dt>Amount still to save</dt>
+                <dd id="gapOut">KES 540,000</dd>
+              </div>
+            </dl>
+
+            <p
+              id="resultStatus"
+              role="status"
+              aria-live="polite"
+            ></p>
+
+            <a
+              id="nextLink"
+              href="#contact"
+              class="button primary"
+              hidden
+            >
+              Get help with my plan →
+            </a>
+
+            <p class="disclaimer">
+              This is a savings estimate, not an insurance
+              quotation. It excludes investment returns,
+              inflation, policy charges and insurance benefits.
+              An adviser must confirm policy premiums and terms.
+            </p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap contact-section" id="contact" hidden>
+      <div class="contact-intro">
+        <p class="eyebrow blue">
+          STEP 2 OF 2 · YOUR NEXT STEP
+        </p>
+
+        <h2>
+          A plan feels better<br>
+          with someone to guide you.
+        </h2>
+
+        <p>
+          Send your goal to Moses Ntella Taa.
+          Choose planning guidance or an ICEA LION
+          education insurance quotation.
+        </p>
+
+        <p class="helper">
+          WhatsApp will open with your details and estimate.
+          Review the message and press Send to share it.
+          Nothing is sent automatically.
+        </p>
+
+        <button id="download" class="button outline" type="button">
+          Download my savings summary ↓
+        </button>
+      </div>
+
+      <form id="contactForm" class="card" novalidate>
+        <div class="field-grid">
+          <div>
+            <label for="name">Your first name</label>
+            <input
+              id="name"
+              type="text"
+              autocomplete="given-name"
+              maxlength="60"
+              required
+            >
+          </div>
+
+          <div>
+            <label for="phone">Your WhatsApp number</label>
+            <input
+              id="phone"
+              type="tel"
+              autocomplete="tel"
+              placeholder="0712 345 678"
+              required
+            >
+          </div>
+        </div>
+
+        <label for="interest">How can I help?</label>
+
+        <select id="interest">
+          <option>
+            Help me understand my education savings goal
+          </option>
+          <option>
+            I would like an ICEA LION education insurance quotation
+          </option>
+        </select>
+
+        <div class="field-grid">
+          <div>
+            <label for="budget">
+              Comfortable monthly budget
+            </label>
+
+            <select id="budget">
+              <option>Not sure yet</option>
+              <option>Below KES 2,000</option>
+              <option>KES 2,000–5,000</option>
+              <option>KES 5,001–10,000</option>
+              <option>Above KES 10,000</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="contactTime">
+              Preferred contact time
+            </label>
+
+            <select id="contactTime">
+              <option>WhatsApp messages only</option>
+              <option>Morning (9 am–12 pm)</option>
+              <option>Afternoon (12–5 pm)</option>
+              <option>Evening (5–7 pm)</option>
+            </select>
+          </div>
+        </div>
+
+        <label class="consent-label">
+          <input id="consent" type="checkbox" required>
+
+          <span>
+            I agree to share these details with Moses Ntella Taa
+            on WhatsApp and be contacted about this education
+            planning enquiry.
+            <a href="#privacy">How my details are used</a>
+          </span>
+        </label>
+
+        <p id="contactError" class="error" role="alert"></p>
+
+        <button class="button primary" type="submit">
+          Send my plan on WhatsApp ↗
+        </button>
+
+        <p
+          id="sendStatus"
+          class="helper"
+          role="status"
+          aria-live="polite"
+        ></p>
+      </form>
+    </section>
+
+    <section class="wrap faq" id="questions">
+      <div class="section-heading">
+        <p class="eyebrow blue">A LITTLE CLARITY</p>
+        <h2>Your questions, answered.</h2>
+      </div>
+
+      <details>
+        <summary>Is this an insurance premium calculator?</summary>
+        <p>
+          No. It divides your remaining savings goal by the
+          months available. Insurance quotations depend on
+          the insurer’s approved terms and your circumstances.
+        </p>
+      </details>
+
+      <details>
+        <summary>Can I change my target?</summary>
+        <p>
+          Yes. Change your target, savings or timeline and
+          calculate again. If the monthly target is too high,
+          discuss your budget and timeline with an adviser.
+        </p>
+      </details>
+
+      <details>
+        <summary>What happens after I share my plan?</summary>
+        <p>
+          Moses receives your details only when you press
+          Send in WhatsApp. He can then respond to your
+          planning or quotation enquiry.
+        </p>
+      </details>
+
+      <details id="privacy">
+        <summary>How are my contact details used?</summary>
+        <p>
+          This website does not upload or save form details
+          to a database. Your details stay in this page until
+          you choose to share them through WhatsApp.
+          WhatsApp processes messages under its own privacy terms.
+          Moses uses your message to respond to this enquiry.
+          You can ask him in the same chat to stop contacting
+          you or delete your enquiry.
+          Your contact details are not displayed publicly.
+        </p>
+      </details>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <strong>School Fees Future Planner</strong>
+
+      <p>
+        Enquiries: Moses Ntella Taa ·
+        <a href="mailto:mosesntella2018@gmail.com">
+          mosesntella2018@gmail.com
+        </a>
+      </p>
+
+      <small>
+        An adviser enquiry tool, not ICEA LION’s official website.
+        Product availability, benefits and premiums must be
+        confirmed with ICEA LION.
+      </small>
+    </div>
+  </footer>
+</body>
+</html>
